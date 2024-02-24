@@ -5,10 +5,13 @@ Pulling images directly from GitLab Container Registry to Kubectl proved elusive
 
 1. Generate Base64 Encoded Credentials
 
+```
 echo -n "<User_name>:<token>" | base64
+```
 
 2. Create creds.json File
 
+```
 {
   "auths": {
     "registry.gitlab.com/mpsrc": {
@@ -16,13 +19,17 @@ echo -n "<User_name>:<token>" | base64
     }
   }
 }
+```
 
 3. Base64 Encode creds.json
 
+```
 cat creds.json | base64
+```
 
 4. Update Kubernetes Secret using a registry-credentials.yml file
 
+```
 apiVersion: v1
 kind: Secret
 metadata:
@@ -31,9 +38,11 @@ metadata:
 type: kubernetes.io/dockerconfigjson
 data:
   .dockerconfigjson: <YOUR_KEY>
+```
 
 5. Then use registry-credentials in your deployment.yml file.
 
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -56,5 +65,6 @@ spec:
           - containerPort: 80
       imagePullSecrets:
         - name: registry-credentials
+```
 
 This step-by-step process ensured secure and authenticated access to the GitLab Container Registry, resolving the image-pulling challenges.
