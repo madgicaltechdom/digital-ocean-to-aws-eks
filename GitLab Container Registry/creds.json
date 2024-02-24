@@ -1,0 +1,7 @@
+{
+  "auths": {
+    "registry.gitlab.com/mpsrc": {
+      "auth": "<Output_Paste_Here>"
+    }
+  }
+}
