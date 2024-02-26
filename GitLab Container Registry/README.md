@@ -88,3 +88,6 @@ Thank you for Reading !! 🙌🏻😁📃, see you in the next blog.🤘
 
 The end ✌🏻
 
+## License
+
+This project is licensed under the MIT License.

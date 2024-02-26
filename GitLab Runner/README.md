@@ -152,3 +152,7 @@ The end ✌🏻
 ## References
 
 - [Configure GitLab CI Runner with Docker executor using AWS EC2](https://www.youtube.com/watch?v=HGJWMTNeYqI).
+
+## License
+
+This project is licensed under the MIT License.
