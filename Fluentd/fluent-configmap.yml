@@ -8,8 +8,8 @@ data:
     <source>
       @type tail
       path /var/log/containers/*laravel*.log
-      pos_file /var/log/fluentd-containers.log.pos
-      tag kubernetes.*
+      pos_file /var/log/fluentd-containers-laravel.log.pos
+      tag kubernetes.laravel.*
       <parse>
         @type none
         format none
@@ -18,11 +18,16 @@ data:
       read_from_head true
     </source>
     
-    <filter kubernetes.**>
+    <filter kubernetes.laravel.**>
       @type kubernetes_metadata
     </filter>
 
-    <match kubernetes.**>
+    <filter kubernetes.laravel.**>
+      @type record_transformer
+      remove_keys $.docker.container_id, $.kubernetes.container_image, $.kubernetes.container_image_id, $.kubernetes.container_name, $.kubernetes.host, $.kubernetes.labels.app, $.kubernetes.labels.pod-template-hash, $.kubernetes.master_url, $.kubernetes.namespace_id, $.kubernetes.namespace_labels.kubernetes_io/metadata_name, $.kubernetes.namespace_name, $.kubernetes.pod_id, $.kubernetes.pod_ip, $.kubernetes.pod_name.keyword, $.message.keyword, $.tag.keyword
+    </filter>
+
+    <match kubernetes.laravel.**>
       @type elasticsearch
       @log_level info
       include_tag_key true
@@ -31,10 +36,10 @@ data:
       scheme "#{ENV['FLUENT_ELASTICSEARCH_SCHEME']}"
       reload_connections true
       logstash_format true
-      logstash_prefix aws.stage.pods
+      logstash_prefix aws.stage.laravel.pods
       <buffer>
           @type file
-          path /var/log/fluentd-buffers/kubernetes.system.buffer
+          path /var/log/fluentd-buffers/kubernetes.laravel.buffer
           flush_mode interval
           retry_type exponential_backoff
           flush_thread_count 2
