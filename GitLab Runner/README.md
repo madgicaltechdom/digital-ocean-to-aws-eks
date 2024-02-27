@@ -143,11 +143,7 @@ sudo gitlab-runner status
 
 ## Conclusion
 
-Congratulations! You have successfully set up Runner on an AWS EC2 instance. By integrating GitLab CI/CD with AWS, you can automate your software development workflows and achieve faster and more reliable deployments. Experiment with different pipeline configurations and explore advanced features to enhance your CI/CD process further. You can refer to the video which I have given in reference. Happy coding!
-
-Thank you for Reading !! 🙌🏻😁📃, see you in the next blog.🤘
-
-The end ✌🏻
+Congratulations! You have successfully set up Runner on an AWS EC2 instance. By integrating GitLab CI/CD with AWS, you can automate your software development workflows and achieve faster and more reliable deployments. Experiment with different pipeline configurations and explore advanced features to enhance your CI/CD process further. You can refer to the video which I have given in reference.
 
 ## References
 

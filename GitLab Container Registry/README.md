@@ -84,10 +84,6 @@ In conclusion, integrating GitLab Container Registry with Amazon EKS offers nume
 
 By following the steps outlined in this readme file and embracing a container-native approach, teams can unlock the full potential of modern application development on AWS.
 
-Thank you for Reading !! 🙌🏻😁📃, see you in the next blog.🤘
-
-The end ✌🏻
-
 ## License
 
 This project is licensed under the MIT License.
