@@ -1,0 +1,36 @@
+stages:
+  - build
+  - deploy_app_on_prod_EKS
+
+build:
+  stage: build
+  image: docker
+  services:
+    - docker:dind
+  only:
+    - prod
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+  script:
+    - docker build -t "$CI_REGISTRY_IMAGE":$CI_COMMIT_SHORT_SHA .
+    - docker image ls
+    - docker push "$CI_REGISTRY_IMAGE":$CI_COMMIT_SHORT_SHA
+
+Deploy app on prod EKS:
+  image: matshareyourscript/aws-helm-kubectl
+  services:
+    - docker:dind
+  stage: deploy_app_on_prod_EKS
+  only:
+    - prod  
+  before_script:
+    - export AWS_ACCESS_KEY_ID="${PRODUCTION_AWS_ACCESS_KEY_ID}"
+    - export AWS_SECRET_ACCESS_KEY="${PRODUCTION_AWS_SECRET_ACCESS_KEY}"
+    - export AWS_DEFAULT_REGION="${PRODUCTION_AWS_REGION}"
+  script:
+    - aws eks --region $PRODUCTION_AWS_REGION update-kubeconfig --name $PRODUCTION_EKS_CLUSTER_NAME
+    - sed -i "s,image:.*,image:\ $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA," k8s/deployment.yaml
+    - kubectl apply -f k8s/
+  when: manual
