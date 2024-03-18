@@ -6,8 +6,6 @@ Welcome to our repository! Here, you'll find various directories, each serving a
 
 3. Dive into "CICD-for-Auto-Deployment" for resources related to our continuous integration and deployment workflows. 
 
-4. Explore "Fluentd" for configurations and guides on managing container logs effectively. 
+4. Explore "Fluentd" for configurations and guides on managing container logs effectively. Need to adjust your system's timezone? Head over to the "Dockerfile" file. 
 
-5. Need to adjust your system's timezone? Head over to the "Set the timezone" directory. 
-
-6. Additionally, we have directories dedicated to managing our GitLab Container Registry and GitLab Runner. Each directory contains valuable resources and documentation to support our development journey. Happy exploring!
+5. Additionally, we have directories dedicated to managing our GitLab Container Registry and GitLab Runner. Each directory contains valuable resources and documentation to support our development journey. Happy exploring!
